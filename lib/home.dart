@@ -23,17 +23,17 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 120,
                 ),
-                Text(
+                const Text(
                   "Welcome!!!",
                   style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w600,
                       color: AppColors.purple),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
                 ButtonWidget(
@@ -42,11 +42,12 @@ class HomePage extends StatelessWidget {
                   onClicked: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ArmTimerPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const ArmTimerPage()),
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ButtonWidget(
@@ -55,11 +56,12 @@ class HomePage extends StatelessWidget {
                   onClicked: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CheekTimerPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const CheekTimerPage()),
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ButtonWidget(
@@ -68,11 +70,12 @@ class HomePage extends StatelessWidget {
                   onClicked: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DoubleChin()),
+                      MaterialPageRoute(
+                          builder: (context) => const DoubleChin()),
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ButtonWidget(
@@ -81,7 +84,8 @@ class HomePage extends StatelessWidget {
                   onClicked: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DoubleChin()),
+                      MaterialPageRoute(
+                          builder: (context) => const DoubleChin()),
                     );
                   },
                 ),

@@ -19,7 +19,7 @@ class DoubleChin extends StatelessWidget {
           body: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 SizedBox(
                   height: 120,
                 ),
