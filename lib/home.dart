@@ -89,6 +89,20 @@ class HomePage extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ButtonWidget(
+                  text: 'Abs Workout',
+                  backgroundColor: AppColors.gold,
+                  onClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DoubleChin()),
+                    );
+                  },
+                ),
               ],
             ),
           )),
