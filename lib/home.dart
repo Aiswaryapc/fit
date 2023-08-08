@@ -1,8 +1,10 @@
+import 'package:fit/pages/cheekTimer.dart';
+import 'package:fit/pages/doubleChin.dart';
 import 'package:flutter/material.dart';
 import 'package:fit/constants/colors.dart';
 
 import 'Widgets/button.dart';
-import 'Widgets/timer.dart';
+import 'pages/armTimer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,26 +24,64 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 220,
+                  height: 120,
                 ),
-                   Text(
-                      "Welcome!!!",
-                      style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.purple),
-                    ),
-                    SizedBox(
-                      height: 120,
-                    ),
+                Text(
+                  "Welcome!!!",
+                  style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.purple),
+                ),
+                SizedBox(
+                  height: 70,
+                ),
                 ButtonWidget(
                   text: 'Arm Workout',
                   backgroundColor: AppColors.gold,
                   onClicked: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => StopWatchTimerPage()),
+                      MaterialPageRoute(builder: (context) => ArmTimerPage()),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ButtonWidget(
+                  text: 'Cheek Workout',
+                  backgroundColor: AppColors.gold,
+                  onClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CheekTimerPage()),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ButtonWidget(
+                  text: 'Double chin Workout',
+                  backgroundColor: AppColors.gold,
+                  onClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DoubleChin()),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ButtonWidget(
+                  text: 'Leg Workout',
+                  backgroundColor: AppColors.gold,
+                  onClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DoubleChin()),
                     );
                   },
                 ),
