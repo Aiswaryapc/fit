@@ -8,13 +8,15 @@ import '../Widgets/button.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class CheekTimerPage extends StatefulWidget {
+  const CheekTimerPage({super.key});
+
   @override
   _CheekTimerPageState createState() => _CheekTimerPageState();
 }
 
 class _CheekTimerPageState extends State<CheekTimerPage> {
   static const countdownDuration = Duration(seconds: 31);
-  Duration duration = Duration();
+  Duration duration = const Duration();
   AudioPlayer player = AudioPlayer();
 
   void play() async {
@@ -73,6 +75,9 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
     Uint8List soundbytes1 =
         bytes1.buffer.asUint8List(bytes1.offsetInBytes, bytes1.lengthInBytes);
     int result1 = await player.playBytes(soundbytes1);
+    (result1 == 1)
+        ? print("Applause sound playing successful.")
+        : print("Error while playing sound.");
   }
 
   Timer? timer;
@@ -129,12 +134,12 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
   }
 
   void period1() {
-    timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
     flag = false;
   }
 
   void addTime() {
-    final addSeconds = -1;
+    const addSeconds = -1;
     setState(() {
       final seconds = duration.inSeconds + addSeconds;
       if (seconds < 0) {
@@ -170,12 +175,12 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
                   children: [
                     Text(
                       cheek[i],
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
                           color: AppColors.purple),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -185,11 +190,11 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
                           image: DecorationImage(
                               image: AssetImage(img[i]), fit: BoxFit.contain)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     buildTime(),
-                    SizedBox(
+                    const SizedBox(
                       height: 60,
                     ),
                     Row(
@@ -204,7 +209,7 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
                             pauseTimer();
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 30,
                         ),
                         ButtonWidget(
@@ -227,35 +232,35 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
                     Container(
                       height: 400,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("assets/img/success.jpg"),
                               fit: BoxFit.fitWidth)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
-                    Text(
+                    const Text(
                       "Congratulations!!!",
                       style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w600,
                           color: AppColors.purple),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       "You succesfully completed your cheek workout",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: AppColors.gold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 80,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     ButtonWidget(
@@ -286,7 +291,7 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
       // buildTimeCard(time: hours, header:'HOURS'),
       // SizedBox(width: 8,),
       buildTimeCard(time: minutes, header: 'MINUTES'),
-      SizedBox(
+      const SizedBox(
         width: 8,
       ),
       buildTimeCard(time: seconds, header: 'SECONDS'),
@@ -298,18 +303,18 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
             child: Text(
               time,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 50),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           Text(header, style: TextStyle(color: Colors.black45)),
@@ -330,7 +335,7 @@ class _CheekTimerPageState extends State<CheekTimerPage> {
                       // stopTimer(resets: false);
                     }
                   }),
-              SizedBox(
+              const SizedBox(
                 width: 12,
               ),
               ButtonWidget(text: "CANCEL", onClicked: stopTimer),
