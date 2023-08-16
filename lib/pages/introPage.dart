@@ -1,26 +1,50 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit/home.dart';
 import 'package:fit/pages/signupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fit/constants/colors.dart';
-import 'package:splashscreen/splashscreen.dart';
 
-class IntroPage extends StatelessWidget {
+class IntroPage extends StatefulWidget {
+  @override
+  SplashScreenState createState() => SplashScreenState();
+}
+
+class SplashScreenState extends State<IntroPage> {
+  User? result = FirebaseAuth.instance.currentUser;
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+        Duration(seconds: 5),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  result != null ? HomePage(uid: result?.uid) : SignUpScreen(),
+            )));
+  }
+
   @override
   Widget build(BuildContext context) {
-    User? result = FirebaseAuth.instance.currentUser;
-    return SplashScreen(
-        navigateAfterSeconds: result != null ? HomePage(uid: result.uid) : SignUp(),
-        seconds: 5,
-        title: new Text(
-          'Welcome To Meet up!',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        ),
-        image: Image.asset('assets/images/dart.png', fit: BoxFit.scaleDown),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        onClick: () => print("flutter"),
-        loaderColor: Colors.red);
+    return Material(
+      child: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.center,
+                colors: [AppColors.bglight, AppColors.white])),
+                child:Center(
+                  child: const Text(
+                      "Fit",
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.purple),
+                    ),
+                ),
+      ),
+    );
   }
 }
