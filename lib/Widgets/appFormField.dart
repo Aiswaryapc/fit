@@ -57,7 +57,7 @@ class _AppFormFieldState extends State<AppFormField> {
       width: 1000,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(18)),
-        border: Border.all(color: AppColors.oldSilver,width: 1),
+        border: Border.all(color: AppColors.purple,width: 1),
       ),
       padding: const EdgeInsets.only(
         left: 20,
