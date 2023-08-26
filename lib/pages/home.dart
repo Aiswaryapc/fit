@@ -7,8 +7,8 @@ import 'package:fit/pages/signupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fit/constants/colors.dart';
 
-import 'Widgets/button.dart';
-import 'pages/armTimer.dart';
+import '../Widgets/button.dart';
+import 'armTimer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key, this.uid}) : super(key: key);

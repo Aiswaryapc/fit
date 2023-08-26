@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:fit/constants/colors.dart';
-import 'package:fit/home.dart';
+import 'package:fit/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Widgets/button.dart';

@@ -1,6 +1,6 @@
 import 'package:fit/Widgets/appFormField.dart';
 import 'package:fit/Widgets/button.dart';
-import 'package:fit/home.dart';
+import 'package:fit/pages/home.dart';
 import 'package:fit/pages/signupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,10 +16,33 @@ class LoginScreen extends StatefulWidget {
 
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
+bool validation() {
+  bool flag = true;
+  if (!_emailController.text.isNotEmpty) {
+    flag = false;
+    toast("Enter your email id!!");
+    return false;
+  }
+  return flag;
+}
 
-void _showToast(String message) {
+void toast(String a) {
   Fluttertoast.showToast(
-      msg: message, toastLength: Toast.LENGTH_LONG, fontSize: 16);
+      msg: a,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      textColor: Colors.white,
+      fontSize: 16.0);
+}
+
+Future<void> resetPassword({required String email}) async {
+  validation();
+  try {
+    return await firebaseAuth.sendPasswordResetEmail(email: email);
+  } catch (e) {
+    toast("This emailId is not registered. Please signup....");
+  }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -64,6 +87,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passwordController,
                   type: AppStrings.passwordTextField,
                   hintText: AppStrings.password),
+              const SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                onTap: () async {
+                  await resetPassword(email: _emailController.text);
+                  toast("check your inbox to change password");
+                },
+                child: Text(
+                  "Forgot Password?",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                      color: AppColors.purple),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 children: [
                   Expanded(

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit/home.dart';
+import 'package:fit/pages/home.dart';
 import 'package:fit/pages/signupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fit/constants/colors.dart';
