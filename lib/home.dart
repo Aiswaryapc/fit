@@ -12,7 +12,7 @@ import 'pages/armTimer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key, this.uid}) : super(key: key);
-final String? uid;
+  final String? uid;
 //final userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
@@ -25,9 +25,8 @@ final String? uid;
               colors: [AppColors.bglight, AppColors.white])),
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: Stack(
-            
-            children:[ Center(
+          body: Stack(children: [
+            Center(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,15 +34,13 @@ final String? uid;
                     const SizedBox(
                       height: 90,
                     ),
-                          
                     const Text(
-                      "Welcome!!! " ,
+                      "Welcome!!! ",
                       style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w600,
                           color: AppColors.purple),
                     ),
-                    
                     const SizedBox(
                       height: 70,
                     ),
@@ -118,30 +115,35 @@ final String? uid;
                 ),
               ),
             ),
-            
-                  Padding(
-                    padding: const EdgeInsets.only(left: 330,right: 10,top: 60),
-                    child: InkWell(
-                      onTap: (){
-                        FirebaseAuth auth = FirebaseAuth.instance;
-        auth.signOut().then((res) {
-           Navigator.pushAndRemoveUntil(
-                context,
-               MaterialPageRoute(builder: (context) => LoginScreen()),
-              (Route<dynamic> route) => false);
-           });
-                      },
-                      child: const Text(
-                       "Logout",
-                       style: TextStyle(
-                           fontSize: 16,
-                           decoration: TextDecoration.underline,
-                           fontWeight: FontWeight.w600,
-                           color: AppColors.purple),
-                                    ),
-                    ),
-                  ),]
-          )),
+            Positioned(
+              top: 60,
+              right: 30,
+              child: InkWell(
+                onTap: () {
+                  FirebaseAuth auth = FirebaseAuth.instance;
+                  auth.signOut().then((res) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        (Route<dynamic> route) => false);
+                  });
+                },
+                child: FittedBox(
+                  child: const Text(
+                    "Logout",
+                    style: TextStyle(
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.purple),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 30,
+            ),
+          ])),
     );
   }
 }

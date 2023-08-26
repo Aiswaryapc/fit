@@ -46,104 +46,103 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.center,
                 colors: [AppColors.bglight, AppColors.white])),
-        child: SafeArea(
-            child: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(top: 10, left: 50, bottom: 10, right: 50),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "SignUp",
-                style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.purple),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              AppFormField(
-                  controller: _firstNameController, hintText: AppStrings.fname),
-              AppFormField(
-                  controller: _lastNameController, hintText: AppStrings.lname),
-              AppFormField(
-                  controller: _emailController,
-                  type: AppStrings.emailTextField,
-                  hintText: AppStrings.email),
-              AppFormField(
-                  controller: _mobileNumberController,
-                  type: AppStrings.phoneTextField,
-                  hintText: AppStrings.phNumber),
-              AppFormField(
-                  controller: _passwordController,
-                  type: AppStrings.passwordTextField,
-                  hintText: AppStrings.password),
-              AppFormField(
-                  controller: _confirmPasswordController,
-                  type: AppStrings.passwordTextField,
-                  hintText: AppStrings.cPassword),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: ButtonWidget(
-                        text: 'SignUp',
-                        backgroundColor: AppColors.gold,
-                        onClicked: () {
-                          if (validation()) {
-                            registerToFb();
-                            clearText();
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account?",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.purple),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
-                        );
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 16,
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.purple),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ]),
+        padding: EdgeInsets.only(top: 10, left: 50, bottom: 10, right: 50),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(
+            height: 20,
           ),
-        )),
+          const Text(
+            "SignUp",
+            style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                color: AppColors.purple),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          AppFormField(
+              controller: _firstNameController, hintText: AppStrings.fname),
+          AppFormField(
+              controller: _lastNameController, hintText: AppStrings.lname),
+          AppFormField(
+              controller: _emailController,
+              type: AppStrings.emailTextField,
+              hintText: AppStrings.email),
+          AppFormField(
+              controller: _mobileNumberController,
+              type: AppStrings.phoneTextField,
+              hintText: AppStrings.phNumber),
+          AppFormField(
+              controller: _passwordController,
+              type: AppStrings.passwordTextField,
+              hintText: AppStrings.password),
+          AppFormField(
+              controller: _confirmPasswordController,
+              type: AppStrings.passwordTextField,
+              hintText: AppStrings.cPassword),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: ButtonWidget(
+                    text: 'SignUp',
+                    backgroundColor: AppColors.gold,
+                    onClicked: () {
+                      if (validation()) {
+                        registerToFb();
+                        clearText();
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Already have an account?",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.purple),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.purple),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]),
+          ),
+        ),
       ),
     );
   }
@@ -211,13 +210,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 100),
-                  child: ButtonWidget(
-                    text: 'OK',
-                    backgroundColor: AppColors.gold,
-                    onClicked: () {
-                      Navigator.of(context).pop();
-                    },
+                  padding: const EdgeInsets.symmetric(horizontal: 80),
+                  child: FittedBox(
+                    child: ButtonWidget(
+                      text: 'OK',
+                      backgroundColor: AppColors.gold,
+                      onClicked: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -249,7 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       toast(
           "Password should contain at least one upper case , one lower case ,one digit ,at least one Special character and must be at least 8 characters in length !!");
       return false;
-    } else if ( _confirmPasswordController.text.compareTo(_passwordController.text )==1) {
+    } else if ( !(_confirmPasswordController.text==_passwordController.text )) {
       flag = false;
       toast("Passwords are not matching");
       return false;

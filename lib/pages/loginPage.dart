@@ -162,13 +162,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 100),
-                  child: ButtonWidget(
-                    text: 'OK',
-                    backgroundColor: AppColors.gold,
-                    onClicked: () {
-                      Navigator.of(context).pop();
-                    },
+                  padding: const EdgeInsets.symmetric(horizontal: 80),
+                  child: FittedBox(
+                    child: ButtonWidget(
+                      text: 'OK',
+                      backgroundColor: AppColors.gold,
+                      onClicked: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
                 ),
               ],

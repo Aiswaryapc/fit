@@ -49,7 +49,7 @@ class _AppFormFieldState extends State<AppFormField> {
         return normalTextField();
     }
   }
-
+bool _passwordInVisible = true;
   Container normalTextField(
       {isEmail = false, isPassword = false, isphone = false,isNumbers=false}) {
     return Container(
@@ -74,7 +74,8 @@ class _AppFormFieldState extends State<AppFormField> {
                 : isNumbers
                   ? TextInputType.number
                   : TextInputType.text ,
-        obscureText: isPassword,
+        obscureText: isPassword?_passwordInVisible:isPassword,
+        
         textCapitalization: !isEmail && !isPassword && !isphone && !isNumbers
             ? TextCapitalization.words
             : TextCapitalization.none,
@@ -88,7 +89,23 @@ class _AppFormFieldState extends State<AppFormField> {
                 : isNumbers
                   ?[FilteringTextInputFormatter.digitsOnly]
                   :[FilteringTextInputFormatter.singleLineFormatter],
-        decoration: InputDecoration(
+        decoration:isPassword? InputDecoration(
+          suffixIcon: IconButton(
+      icon: Icon(
+        _passwordInVisible ? Icons.visibility_off : Icons.visibility,
+        color:AppColors.purple, 
+      ), onPressed: () {
+        setState(() {
+          _passwordInVisible = !_passwordInVisible; 
+        });
+      },),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            hintStyle: const TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+            hintText: widget.hintText)
+            :InputDecoration(
             border: const OutlineInputBorder(
               borderSide: BorderSide.none,
             ),
