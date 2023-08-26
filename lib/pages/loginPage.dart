@@ -43,6 +43,7 @@ Future<void> resetPassword({required String email}) async {
       success = true;
       return await firebaseAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
+      success = false;
       toast("This emailId is not registered. Please signup....");
     }
   }
