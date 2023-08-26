@@ -36,12 +36,15 @@ void toast(String a) {
       fontSize: 16.0);
 }
 
+bool success = false;
 Future<void> resetPassword({required String email}) async {
-  validation();
-  try {
-    return await firebaseAuth.sendPasswordResetEmail(email: email);
-  } catch (e) {
-    toast("This emailId is not registered. Please signup....");
+  if (validation()) {
+    try {
+      success = true;
+      return await firebaseAuth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      toast("This emailId is not registered. Please signup....");
+    }
   }
 }
 
@@ -93,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
               InkWell(
                 onTap: () async {
                   await resetPassword(email: _emailController.text);
-                  toast("check your inbox to change password");
+                 if(success) toast("check your inbox to change password");
                 },
                 child: Text(
                   "Forgot Password?",
