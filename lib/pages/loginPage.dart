@@ -74,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: AppColors.gold,
                         onClicked: () {
                           logInToFb();
+                          clearText();
                         },
                       ),
                     ),
@@ -124,6 +125,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void clearText() {
+    _passwordController.clear();
+    _emailController.clear();
+  }
+
   void logInToFb() {
     firebaseAuth
         .signInWithEmailAndPassword(
@@ -140,26 +146,31 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Invalid Credentials",style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.purple),),
-              content: Text(err.message,style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.gold),),
+              title: Text(
+                "Invalid Credentials",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.purple),
+              ),
+              content: Text(
+                err.message,
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gold),
+              ),
               actions: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 100),
                   child: ButtonWidget(
-                          text: 'OK',
-                          backgroundColor: AppColors.gold,
-                          onClicked: () {
-                           Navigator.of(context).pop();
-                          },
-                        ),
+                    text: 'OK',
+                    backgroundColor: AppColors.gold,
+                    onClicked: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
                 ),
-      
               ],
             );
           });

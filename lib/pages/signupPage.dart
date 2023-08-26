@@ -94,7 +94,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         text: 'SignUp',
                         backgroundColor: AppColors.gold,
                         onClicked: () {
-                          registerToFb();
+                          if (validation()) {
+                            registerToFb();
+                            clearText();
+                          }
                         },
                       ),
                     ),
@@ -150,48 +153,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
         .createUserWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text)
         .then((result) {
-      dbRef.child(result.user!.uid).set({
-        "email": _emailController.text,
-        "name": "${_firstNameController.text} ${_lastNameController.text}"
-      }).then((res) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(
-                  "Success",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.purple),
-                ),
-                content: Text(
-                  "User created successfully",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.gold),
-                ),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 100),
-                    child: ButtonWidget(
-                      text: 'OK',
-                      backgroundColor: AppColors.gold,
-                      onClicked: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomePage(uid: result.user!.uid)),
-                        );
-                      },
-                    ),
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(
+                "Success",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.purple),
+              ),
+              content: Text(
+                "User created successfully",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gold),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
+                  child: ButtonWidget(
+                    text: 'OK',
+                    backgroundColor: AppColors.gold,
+                    onClicked: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                HomePage(uid: result.user!.uid)),
+                      );
+                    },
                   ),
-                ],
-              );
-            });
-      });
+                ),
+              ],
+            );
+          });
     }).catchError((err) {
       showDialog(
           context: context,
@@ -228,12 +226,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _firstNameController.dispose();
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-  //   _lastNameController.dispose();
-  // }
+  bool validation() {
+    bool flag = true;
+    if (!_firstNameController.text.isNotEmpty) {
+      flag = false;
+      toast("First name cannot be null!!");
+      return false;
+    } else if (!_lastNameController.text.isNotEmpty) {
+      flag = false;
+      toast("Last name cannot be null!!");
+      return false;
+    } else if (!validateEmail(_emailController.text)) {
+      flag = false;
+      toast("Invalid email id !!!");
+      return false;
+    } else if (!validatePhone(_mobileNumberController.text)) {
+      flag = false;
+      toast("Invalid Mobile number!!");
+      return false;
+    } else if (!validatePassword(_passwordController.text)) {
+      flag = false;
+      toast(
+          "Password should contain at least one upper case , one lower case ,one digit ,at least one Special character and must be at least 8 characters in length !!");
+      return false;
+    } else if ( _confirmPasswordController.text.compareTo(_passwordController.text )==1) {
+      flag = false;
+      toast("Passwords are not matching");
+      return false;
+    }
+    return flag;
+  }
+
+  void toast(String a) {
+    Fluttertoast.showToast(
+        msg: a,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  bool validatePassword(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
+    bool validatePhone(String value) {
+    String pattern =
+        r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+  bool validateEmail(String value) {
+    String pattern =
+         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
+  void clearText() {
+    _passwordController.clear();
+    _emailController.clear();
+    _firstNameController.clear();
+    _confirmPasswordController.clear();
+    _mobileNumberController.clear();
+    _lastNameController.clear();
+  }
 }
