@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:fit/constants/colors.dart';
-import 'package:fit/home.dart';
+import 'package:fit/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Widgets/button.dart';
@@ -143,14 +143,16 @@ class _ArmTimerPageState extends State<ArmTimerPage> {
               width: MediaQuery.of(context).size.width * 0.5,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 45, vertical: 96),
-                child: ButtonWidget(
-                  text: 'Resume',
-                  backgroundColor: AppColors.gold,
-                  onClicked: () {
-                    unpauseTimer();
-                    Navigator.pop(context, true);
-                  },
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                child: FittedBox(
+                  child: ButtonWidget(
+                    text: 'Resume',
+                    backgroundColor: AppColors.gold,
+                    onClicked: () {
+                      unpauseTimer();
+                      Navigator.pop(context, true);
+                    },
+                  ),
                 ),
               ),
             ),
@@ -205,26 +207,30 @@ class _ArmTimerPageState extends State<ArmTimerPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ButtonWidget(
-                          text: 'Pause',
-                          backgroundColor: AppColors.gold,
-                          width: 100,
-                          onClicked: () {
-                            pauseTimer();
-                          },
+                        FittedBox(
+                          child: ButtonWidget(
+                            text: 'Pause',
+                            backgroundColor: AppColors.gold,
+                            width: 100,
+                            onClicked: () {
+                              pauseTimer();
+                            },
+                          ),
                         ),
                         const SizedBox(
                           width: 30,
                         ),
-                        ButtonWidget(
-                          text: 'Skip',
-                          backgroundColor: AppColors.gold,
-                          width: 100,
-                          onClicked: () {
-                            i++;
-                            skip = true;
-                            reset();
-                          },
+                        FittedBox(
+                          child: ButtonWidget(
+                            text: 'Skip',
+                            backgroundColor: AppColors.gold,
+                            width: 100,
+                            onClicked: () {
+                              i++;
+                              skip = true;
+                              reset();
+                            },
+                          ),
                         ),
                       ],
                     ),
